@@ -43,4 +43,4 @@ jobs:
 
           script: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
-            sudo docker run --name hackathonm -d -p 8080:8080 -e ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
+            sudo docker run --name hackathonm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
