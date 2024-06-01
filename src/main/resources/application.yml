@@ -17,3 +17,13 @@ spring:
         hbm2ddl:
           auto: update
         default_batch_fetch_size: 1000
+
+cloud:
+  aws:
+    s3:
+      bucket: image-model-demo
+      path:
+        upload: upload
+    credentials:
+      access-key: AKIAVNC7ICKTDWXUFDYG
+      secret-key: 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
