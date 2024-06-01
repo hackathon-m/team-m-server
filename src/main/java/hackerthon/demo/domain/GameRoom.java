@@ -7,6 +7,9 @@ import hackerthon.demo.domain.enums.RoomStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Builder
@@ -34,6 +37,9 @@ public class GameRoom extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member host;
+
+    @OneToMany
+    private List<Gifticon> gifticons = new ArrayList<>();
 
     @Builder
     public GameRoom( String title, Category category, int field, GameType gameType, RoomStatus roomStatus, Member host) {

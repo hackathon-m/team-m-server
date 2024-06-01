@@ -69,7 +69,7 @@ public class SuggestionController {
             summary = "제안 거절하기 ",
             responses = @ApiResponse(responseCode = "200", description = "제안을 거절합니다.")
     )
-    @GetMapping("/accept")
+    @GetMapping("/rejecct")
     public Response<String> rejectSuggestion(){
 //        suggestionService.rejectSuggestion();
         return Response.data("success");

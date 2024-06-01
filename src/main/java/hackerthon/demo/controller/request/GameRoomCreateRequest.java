@@ -16,22 +16,23 @@ import lombok.Getter;
 @Getter
 public class GameRoomCreateRequest {
 
-    //private final Long hostId;
     private final String title;
     @Enumerated(EnumType.STRING)
     private final Category category;
     private final int field;
     @Enumerated(EnumType.STRING)
     private final GameType gameType;
-    //private final Member host;
+    private final Long gifticonId;
+
 
     @Builder
-    public GameRoomCreateRequest(@NotNull Long hostId, @NotBlank String title, @NotNull Category category, int field, @NotNull GameType gameType) {
+    public GameRoomCreateRequest(@NotNull Long hostId, @NotBlank String title, @NotNull Category category, int field, @NotNull GameType gameType, @NotNull Long gifticonId) {
         //this.hostId = hostId;
         this.title = title;
         this.category = category;
         this.field = field;
         this.gameType = gameType;
+        this.gifticonId = gifticonId;
     }
 
     // 요청 객체를 엔티티로 변환하는 static 메서드
