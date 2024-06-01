@@ -12,6 +12,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Setter
 public class Gifticon extends BaseEntity {
 
     @Id

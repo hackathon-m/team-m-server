@@ -8,9 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +31,16 @@ public class GameLogController {
         }
     }
 
+
+    @PostMapping("")
+    @Operation(summary = "게임 결과 반영")
+    public ApiResponse<String> updateGameResult(@RequestParam("winnerId")Long winnerId,
+                                                @RequestParam("gameRoomId")Long gameRoomId){
+        try{
+            return ApiResponse.onSuccess(gameLogService.updateGameResult(winnerId, gameRoomId));
+        }catch (Exception e){
+            return ApiResponse.onFailure(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage(), null);
+        }
+    }
 
 }
