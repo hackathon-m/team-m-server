@@ -42,5 +42,5 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
 
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hackathonm:latest
-            sudo docker run --name hackathonm -d -p 8080:8080 -e ${{ secrets.DOCKER_USERNAME }}/hackathonm:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
+            sudo docker run --name hackathonm -d -p 8080:8080 -e ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
