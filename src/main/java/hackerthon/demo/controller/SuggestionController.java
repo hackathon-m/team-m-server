@@ -2,8 +2,8 @@ package hackerthon.demo.controller;
 
 import hackerthon.demo.common.dto.Response;
 import hackerthon.demo.controller.request.SuggestionCreateRequest;
-import hackerthon.demo.controller.response.AcceptSuggetionResponseDto;
-import hackerthon.demo.controller.response.GameRoomResponseDto;
+import hackerthon.demo.controller.response.AcceptSuggestionResponseDto;
+import hackerthon.demo.controller.response.SuggestionListResponseDto;
 import hackerthon.demo.controller.response.SuggestionResponseDto;
 import hackerthon.demo.service.SuggestionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,9 +41,13 @@ public class SuggestionController {
             summary = "받은 제안 조회",
             responses = @ApiResponse(responseCode = "200", description = "자신이 만든 방에 대해서 받은 제안 요청을 봅니다")
     )
-    @GetMapping("/test2")
-    public Response<String> getPendingSuggestions(){
-        return Response.data("success");
+    @GetMapping("/get")
+    public Response<List<SuggestionListResponseDto>> getPendingSuggestions(HttpServletRequest request, @RequestParam("gameRoomId") Long gameRoomId){
+        String serialId = request.getHeader("Authorization");
+
+        List<SuggestionListResponseDto> suggestionListResponseDtos = suggestionService.getSuggestions(gameRoomId);
+
+        return Response.data(suggestionListResponseDtos);
     }
 
 
@@ -52,15 +56,20 @@ public class SuggestionController {
             summary = "제안 수락하기",
             responses = @ApiResponse(responseCode = "200", description = "제안을 수락합니다.")
     )
-    public Response< AcceptSuggetionResponseDto> acceptSuggestion(HttpServletRequest request, @RequestParam("suggestionId") Long suggestionId) {
+    public Response<AcceptSuggestionResponseDto> acceptSuggestion(HttpServletRequest request, @RequestParam("suggestionId") Long suggestionId) {
 
-        AcceptSuggetionResponseDto result = suggestionService.acceptSuggestion(request, suggestionId);
+        AcceptSuggestionResponseDto result = suggestionService.acceptSuggestion(request, suggestionId);
         return Response.data(result);
 
     }
 
-    @GetMapping("/test")
-    public Response<String> getPendingSuggestion(){
+    @Operation(
+            summary = "제안 거절하기 ",
+            responses = @ApiResponse(responseCode = "200", description = "제안을 거절합니다.")
+    )
+    @GetMapping("/rejecct")
+    public Response<String> rejectSuggestion(){
+//        suggestionService.rejectSuggestion();
         return Response.data("success");
     }
 }
