@@ -1,10 +1,10 @@
 package hackerthon.demo.domain;
 
 import hackerthon.demo.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import hackerthon.demo.domain.enums.Category;
+import hackerthon.demo.domain.enums.GameType;
+import hackerthon.demo.domain.enums.RoomStatus;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -18,5 +18,33 @@ public class GameRoom extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long hostId;
+    private String title;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    private int field;
+
+    @Enumerated(EnumType.STRING)
+    private GameType gameType;
+
+    @Enumerated(EnumType.STRING)
+    private RoomStatus roomStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member host;
+
+    @Builder
+    public GameRoom( String title, Category category, int field, GameType gameType, RoomStatus roomStatus, Member host) {
+        this.title = title;
+        this.category = category;
+        this.field = field;
+        this.gameType = gameType;
+        this.roomStatus = roomStatus;
+        this.host = host;
+    }
+
+
+
 }
