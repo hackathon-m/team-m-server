@@ -42,5 +42,11 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
 
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
+            
+#           Stop and remove the existing hackathonm container if it exists
+            sudo docker stop hackathonm || true
+            sudo docker rm hackathonm || true
+  
+#           Remove the existing hackathonm image if it exists
+            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest || true
             sudo docker run --name hackathonm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
