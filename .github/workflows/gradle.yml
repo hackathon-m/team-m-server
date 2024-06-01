@@ -31,8 +31,8 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker build -t app .
-          docker tag app ${{ secrets.DOCKERHUB_USERNAME }}/hackathon-m:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/hackathon-m:latest
+          docker tag app ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v1.0.3
@@ -42,5 +42,5 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
 
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hackathon-m:latest
-            sudo docker run --name hackathon-m -d -p 8080:8080 -e ${{ secrets.DOCKER_USERNAME }}/hackathon-m:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hackathonm:latest
+            sudo docker run --name hackathonm -d -p 8080:8080 -e ${{ secrets.DOCKER_USERNAME }}/hackathonm:latest
