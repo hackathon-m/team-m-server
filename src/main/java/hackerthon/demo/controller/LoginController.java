@@ -1,5 +1,6 @@
 package hackerthon.demo.controller;
 
+import hackerthon.demo.apiPayload.ApiResponse;
 import hackerthon.demo.common.dto.MyPageResponseDto;
 import hackerthon.demo.domain.Member;
 import hackerthon.demo.service.MemberService;
@@ -21,23 +22,23 @@ public class LoginController {
 
     @Operation(summary = "회원가입", description = "serialId Authorization 헤더값에 추가, nickname 파라미터 추가")
     @GetMapping("/signup")
-    public ResponseEntity<String> signUp(HttpServletRequest request, @RequestParam("nickname") String nickname) throws Exception {
+    public ApiResponse<String> signUp(HttpServletRequest request, @RequestParam("nickname") String nickname) throws Exception {
         String serialId = request.getHeader("Authorization");
         memberService.signUp(serialId, nickname);
-        return ResponseEntity.ok("회원가입 success");
+        return ApiResponse.onSuccess("회원가입 success");
     }
 
     @Operation(summary = "로그인", description = "serialId만 Authorization 헤더값에 추가")
     @GetMapping("/login")
-    public ResponseEntity<String> login(HttpServletRequest request) throws Exception {
+    public ApiResponse<String> login(HttpServletRequest request) throws Exception {
         String serialId = request.getHeader("Authorization");
         memberService.login(serialId);
-        return ResponseEntity.ok("login success");
+        return ApiResponse.onSuccess("login success");
     }
     
 
     @GetMapping("/mypage")
-    public ResponseEntity<MyPageResponseDto> myPage(HttpServletRequest request) throws Exception {
+    public ApiResponse<MyPageResponseDto> myPage(HttpServletRequest request) throws Exception {
         String serialId = request.getHeader("Authorization");
 
         Optional<Member> member = memberService.getInfo(serialId);
@@ -45,9 +46,10 @@ public class LoginController {
         if(member.isPresent()) {
             Member existedMember = member.get();
             MyPageResponseDto myPageResponseDto = MyPageResponseDto.convertor(existedMember);
-            return ResponseEntity.ok(myPageResponseDto);
+            return ApiResponse.onSuccess(myPageResponseDto);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ApiResponse.onFailure(HttpStatus.NOT_FOUND.toString(), "찾을 수 없습니다", null);
         }
+
     }
 }
