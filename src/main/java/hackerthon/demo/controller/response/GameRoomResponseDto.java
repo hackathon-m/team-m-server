@@ -18,18 +18,23 @@ public class GameRoomResponseDto {
     private int field;
     private Category category;
     private GameType gameType;
+    private String gifticonTitle;
+    private String imageUrl;
 
     public static GameRoomResponseDto fromEntity(GameRoom gameRoom) {
+
+        String gifticonTitle = gameRoom.getGifticons().isEmpty() ? null : gameRoom.getGifticons().get(0).getName();
+        String imageUrl = gameRoom.getCategory().getImageUrl();
+
         return GameRoomResponseDto.builder()
                 .id(gameRoom.getId())
                 .title(gameRoom.getTitle())
                 .field(gameRoom.getField())
                 .category(gameRoom.getCategory())
                 .gameType(gameRoom.getGameType())
+                .gifticonTitle(gifticonTitle)
+                .imageUrl(imageUrl)
                 .build();
     }
-
-
-
 
 }

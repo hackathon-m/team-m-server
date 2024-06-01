@@ -25,7 +25,8 @@ public class MemberService {
             Member newMember = Member.builder()
                     .serialId(serialId)
                     .nickName(nickname)
-                    .winRate((double) 0)
+                    .win((double)0)
+                    .total((double) 0)
                     .build();
 
             memberRepository.save(newMember);
