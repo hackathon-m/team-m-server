@@ -75,7 +75,7 @@ public class SuggestionService {
     public List<SuggestionListResponseDto> getSuggestions(String serialId) {
         List<Suggestion> suggestions = new ArrayList<>();
         Member member = memberRepository.getBySerialId(serialId);
-        List<GameRoom> gameRoomList = gameRoomRepository.findAllById(member.getId());
+        List<GameRoom> gameRoomList = gameRoomRepository.findAllByMemberId(member.getId());
         gameRoomList.forEach(gameRoom -> {
             suggestions.addAll(suggestionRepository.getByGameRoomId(gameRoom.getId()));
         });

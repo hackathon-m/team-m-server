@@ -12,5 +12,5 @@ public interface GameRoomRepository extends JpaRepository<GameRoom, Long> {
     @Query("SELECT g FROM GameRoom g WHERE :category IS NULL OR g.category = :category")
     List<GameRoom> findByCategoryOrAll(@Param("category") Category category);
 
-    List<GameRoom> findAllById(Long id);
+    List<GameRoom> findAllByMemberId(Long id);
 }
