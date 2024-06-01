@@ -1,9 +1,16 @@
 spring:
+  application:
+    name: demo
+
   datasource:
-    url: jdbc:mysql://localhost:3306/umc
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: newjeans
-    password: hk987852!
+    url: jdbc:mysql://hackathon-m-rds.ciwy7obdgrgx.ap-northeast-2.rds.amazonaws.com/hackathon_m
+    username: admin
+    password: admin123
+
+  #    url: jdbc:mysql://localhost:3306/hackathon_m
+  #    username: root
+  #    password: 1108
   sql:
     init:
       mode: never
@@ -16,7 +23,6 @@ spring:
         use_sql_comments: true
         hbm2ddl:
           auto: update
-        default_batch_fetch_size: 1000
 
 cloud:
   aws:
@@ -25,5 +31,5 @@ cloud:
       path:
         upload: upload
     credentials:
-      access-key: AKIAVNC7ICKTDWXUFDYG
-      secret-key: 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
+      access-key: AKIAVNC7ICKTGD3BG6GQ
+      secret-key: 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
