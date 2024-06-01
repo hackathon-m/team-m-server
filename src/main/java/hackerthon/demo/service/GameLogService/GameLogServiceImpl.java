@@ -60,8 +60,12 @@ public class GameLogServiceImpl implements GameLogService {
         List<Gifticon> gifticons = gameRoom.getGifticons();
 
         for (Gifticon gifticon : gifticons) {
-            gifticon.setMember(member);
-            gifticonRepository.save(gifticon);
+            if(gifticon.getMember().getId() != member.getId()){
+                gifticon.setMember(member);
+                gifticon.setBetEarned(true);
+                gifticonRepository.save(gifticon);
+            }
+
         }
 
         return "성공적으로 반영되었습니다.";
