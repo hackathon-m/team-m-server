@@ -19,7 +19,7 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long serialId;
+    private String serialId;
     private String nickName;
     private Double winRate;
 

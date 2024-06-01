@@ -24,9 +24,7 @@ import java.util.Collections;
 @OpenAPIDefinition
 public class SwaggerConfiguration {
     private final SecurityScheme securityScheme = new SecurityScheme()
-        .type(SecurityScheme.Type.HTTP)
-        .scheme("bearer")
-        .bearerFormat("JWT")
+        .type(SecurityScheme.Type.APIKEY)
         .in(SecurityScheme.In.HEADER)
         .name("Authorization");
 
