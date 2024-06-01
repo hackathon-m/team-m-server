@@ -13,6 +13,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+
 @Getter
 public class GameRoomCreateRequest {
 
@@ -44,6 +46,7 @@ public class GameRoomCreateRequest {
                 .gameType(request.getGameType())
                 .roomStatus(RoomStatus.RECRUIT)
                 .host(host)
+                .gifticons(new ArrayList<>())
                 .build();
     }
 }
