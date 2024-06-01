@@ -70,12 +70,12 @@ public class SuggestionService {
         return acceptSuggestionResponseDto;
     }
 
-    public List<SuggestionListResponseDto> getSuggestions(Long serialId) {
+    public List<SuggestionListResponseDto> getSuggestions(String serialId) {
         List<Suggestion> suggestions = new ArrayList<>();
         Member member = memberRepository.getBySerialId(serialId);
         List<GameRoom> gameRoomList = gameRoomRepository.findAllById(member.getId());
-        gameRoomList.stream().map(gameRoom -> {
-            suggestions.add(List<> suggestionRepository.findByGameRoomId(gameRoom.getId()));
+        gameRoomList.forEach(gameRoom -> {
+            suggestions.addAll(suggestionRepository.findByGameRoomId(gameRoom.getId()));
         });
         List<SuggestionListResponseDto> suggestionListResponseDtos = suggestions.stream()
                 .map(suggestion -> {

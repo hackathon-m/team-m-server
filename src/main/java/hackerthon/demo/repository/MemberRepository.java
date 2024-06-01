@@ -9,5 +9,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findBySerialId(String serialId);
 
-    Member getBySerialId(Long serialId);
+    Member getBySerialId(String serialId);
 }
