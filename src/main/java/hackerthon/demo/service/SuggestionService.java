@@ -8,6 +8,7 @@ import hackerthon.demo.domain.GameRoom;
 import hackerthon.demo.domain.Gifticon;
 import hackerthon.demo.domain.Member;
 import hackerthon.demo.domain.Suggestion;
+import hackerthon.demo.domain.enums.RoomStatus;
 import hackerthon.demo.repository.GameRoomRepository;
 import hackerthon.demo.repository.GifticonRepository;
 import hackerthon.demo.repository.MemberRepository;
@@ -60,6 +61,7 @@ public class SuggestionService {
         GameRoom gameRoom = gameRoomRepository.findById(suggestion.getGameRoom().getId()).orElseThrow(() -> new EntityNotFoundException("해당 게임방 존재하지 않음"));
 
         gameRoom.getGifticons().add(suggestion.getGifticon());
+        gameRoom.setRoomStatus(RoomStatus.COMPLETE);
         gameRoomRepository.save(gameRoom);
 
         AcceptSuggestionResponseDto acceptSuggestionResponseDto = AcceptSuggestionResponseDto.resultDto(host.getId(), suggestion.getSuggester().getId(), gameRoom.getId());
