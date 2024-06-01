@@ -24,7 +24,7 @@ public class GifticonController {
     @GetMapping("")
     @Operation(summary = "내 기프티콘 조회")
     public ApiResponse<List<GifticonResponse.GifticonResultDTO>> getGifticons(HttpServletRequest request){
-        String serialId = request.getParameter("Authorization");
+        String serialId = request.getHeader("Authorization");
         try{
             List<GifticonResponse.GifticonResultDTO> gifticonResultDTOS = gifticonService.findGifticonList(serialId);
 

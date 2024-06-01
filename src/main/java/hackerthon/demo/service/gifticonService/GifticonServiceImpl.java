@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,16 +25,19 @@ public class GifticonServiceImpl implements GifticonService {
     @Transactional
     public List<GifticonResponse.GifticonResultDTO> findGifticonList(String serialId){
 
-        Member member = memberRepository.findBySerialId(serialId).orElseThrow(()-> new IllegalArgumentException());
+        Member member = memberRepository.findBySerialId(serialId).orElseThrow(()-> new IllegalArgumentException("해당 시리얼ID를 가진 멤버가 존재하지 않습니다."));
 
         List<Gifticon> gifticonList =gifticonRepository.findByMemberId(member.getId());
+
+        if(gifticonList.isEmpty()){
+            return Collections.emptyList();
+        }
 
         List<GifticonResponse.GifticonResultDTO> responseDTOs = gifticonList.stream()
                 .map(GifticonConverter::toGifticonResultDTO)
                 .collect(Collectors.toList());
 
         return responseDTOs;
-
     }
 
 }
