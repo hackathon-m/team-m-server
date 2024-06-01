@@ -13,6 +13,7 @@ import lombok.Getter;
 @Builder
 public class GameRoomResponseDto {
 
+    private Long id;
     private String title;
     private int field;
     private Category category;
@@ -20,6 +21,7 @@ public class GameRoomResponseDto {
 
     public static GameRoomResponseDto fromEntity(GameRoom gameRoom) {
         return GameRoomResponseDto.builder()
+                .id(gameRoom.getId())
                 .title(gameRoom.getTitle())
                 .field(gameRoom.getField())
                 .category(gameRoom.getCategory())

@@ -8,9 +8,9 @@ spring:
     username: admin
     password: admin123
 
-#    url: jdbc:mysql://localhost:3306/hackathon_m
-#    username: root
-#    password: 1108
+  #    url: jdbc:mysql://localhost:3306/hackathon_m
+  #    username: root
+  #    password: 1108
   sql:
     init:
       mode: never
@@ -31,5 +31,5 @@ cloud:
       path:
         upload: upload
     credentials:
-      access-key: ${{ secret.AWS_ACCESSKEY }}
-      secret-key: ${{ secret.AWS_SECRETKEY }}
+      access-key: AKIAVNC7ICKTGD3BG6GQ
+      secret-key: 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

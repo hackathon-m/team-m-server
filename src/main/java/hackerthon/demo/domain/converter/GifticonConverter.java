@@ -7,6 +7,7 @@ public class GifticonConverter {
 
     public static GifticonResponse.GifticonResultDTO toGifticonResultDTO(Gifticon gifticon) {
         return GifticonResponse.GifticonResultDTO.builder()
+                .id(gifticon.getId())
                 .price(gifticon.getPrice())
                 .name(gifticon.getName())
                 .brand(gifticon.getBrand())
