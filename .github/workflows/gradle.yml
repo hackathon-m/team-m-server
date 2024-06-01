@@ -46,4 +46,4 @@ jobs:
             sudo docker rm hackathonm || true
   
             sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest || true
-            sudo docker run --name hackathonm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
+            sudo docker run --name hackathonm -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/hackathonm:latest
