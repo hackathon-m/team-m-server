@@ -14,38 +14,21 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     /**
-     * 회원가입
-     * @param serialId
-     * @param nickname
+     * 로그인
+     * @param serialId, nickname
+     * @return
      */
-    public void signUp(String serialId, String nickname) throws Exception {
-        Optional<Member> existedMember = memberRepository.findBySerialId(serialId);
-        if(existedMember.isPresent()) {
-            throw new Exception("이미 존재하는 회원입니다.");
-        } else {
-            Member member = Member.builder()
+    public void login(String serialId, String nickname) {
+        Optional<Member> member = memberRepository.findBySerialId(serialId);
+
+        if(member.isEmpty()) {
+            Member newMember = Member.builder()
                     .serialId(serialId)
                     .nickName(nickname)
                     .winRate((double) 0)
                     .build();
 
-            memberRepository.save(member);
-        }
-
-
-    }
-
-    /**
-     * 로그인
-     * @param serialId
-     * @return
-     */
-    public void login(String serialId) throws Exception {
-        Optional<Member> member = memberRepository.findBySerialId(serialId);
-
-        if(member.isEmpty()) {
-            //해당 회원은 없습니다.
-            throw new Exception();
+            memberRepository.save(newMember);
         }
     }
 
