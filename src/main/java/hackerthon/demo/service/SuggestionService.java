@@ -66,6 +66,8 @@ public class SuggestionService {
         gameRoom.setRoomStatus(RoomStatus.COMPLETE);
         gameRoomRepository.save(gameRoom);
 
+        suggestionRepository.delete(suggestion);
+
         AcceptSuggestionResponseDto acceptSuggestionResponseDto = AcceptSuggestionResponseDto.resultDto(host.getId(), suggestion.getSuggester().getId(), gameRoom.getId());
         return acceptSuggestionResponseDto;
     }
