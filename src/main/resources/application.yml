@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/neordinary_hackathon_6th
+    url: jdbc:mysql://localhost:3306/umc
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
+    username: newjeans
+    password: hk987852!
   sql:
     init:
       mode: never
