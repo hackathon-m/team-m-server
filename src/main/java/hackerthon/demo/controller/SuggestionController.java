@@ -5,6 +5,7 @@ import hackerthon.demo.controller.request.SuggestionCreateRequest;
 import hackerthon.demo.controller.response.AcceptSuggestionResponseDto;
 import hackerthon.demo.controller.response.SuggestionListResponseDto;
 import hackerthon.demo.controller.response.SuggestionResponseDto;
+import hackerthon.demo.domain.Member;
 import hackerthon.demo.service.SuggestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -42,10 +43,9 @@ public class SuggestionController {
             responses = @ApiResponse(responseCode = "200", description = "자신이 만든 방에 대해서 받은 제안 요청을 봅니다")
     )
     @GetMapping("/get")
-    public Response<List<SuggestionListResponseDto>> getPendingSuggestions(HttpServletRequest request, @RequestParam("gameRoomId") Long gameRoomId){
+    public Response<List<SuggestionListResponseDto>> getPendingSuggestions(HttpServletRequest request){
         String serialId = request.getHeader("Authorization");
-
-        List<SuggestionListResponseDto> suggestionListResponseDtos = suggestionService.getSuggestions(gameRoomId);
+        List<SuggestionListResponseDto> suggestionListResponseDtos = suggestionService.getSuggestions(serialId);
 
         return Response.data(suggestionListResponseDtos);
     }

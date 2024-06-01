@@ -19,7 +19,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,8 +70,13 @@ public class SuggestionService {
         return acceptSuggestionResponseDto;
     }
 
-    public List<SuggestionListResponseDto> getSuggestions(Long gameRoomId) {
-        List<Suggestion> suggestions = suggestionRepository.findByGameRoomId(gameRoomId);
+    public List<SuggestionListResponseDto> getSuggestions(Long serialId) {
+        List<Suggestion> suggestions = new ArrayList<>();
+        Member member = memberRepository.getBySerialId(serialId);
+        List<GameRoom> gameRoomList = gameRoomRepository.findAllById(member.getId());
+        gameRoomList.stream().map(gameRoom -> {
+            suggestions.add(List<> suggestionRepository.findByGameRoomId(gameRoom.getId()));
+        });
         List<SuggestionListResponseDto> suggestionListResponseDtos = suggestions.stream()
                 .map(suggestion -> {
                     SuggestionListResponseDto suggestionListResponseDto = SuggestionListResponseDto.fromEntity(suggestion);
