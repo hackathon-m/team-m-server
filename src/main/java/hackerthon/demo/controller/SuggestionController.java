@@ -2,6 +2,7 @@ package hackerthon.demo.controller;
 
 import hackerthon.demo.common.dto.Response;
 import hackerthon.demo.controller.request.SuggestionCreateRequest;
+import hackerthon.demo.controller.response.AcceptSuggetionResponseDto;
 import hackerthon.demo.controller.response.GameRoomResponseDto;
 import hackerthon.demo.controller.response.SuggestionResponseDto;
 import hackerthon.demo.service.SuggestionService;
@@ -45,10 +46,19 @@ public class SuggestionController {
         return Response.data("success");
     }
 
+
+    @PostMapping("/accept")
     @Operation(
-            summary = "제안 수락하기 ",
+            summary = "제안 수락하기",
             responses = @ApiResponse(responseCode = "200", description = "제안을 수락합니다.")
     )
+    public Response< AcceptSuggetionResponseDto> acceptSuggestion(HttpServletRequest request, @RequestParam("suggestionId") Long suggestionId) {
+
+        AcceptSuggetionResponseDto result = suggestionService.acceptSuggestion(request, suggestionId);
+        return Response.data(result);
+
+    }
+
     @GetMapping("/test")
     public Response<String> getPendingSuggestion(){
         return Response.data("success");
