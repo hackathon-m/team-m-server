@@ -31,5 +31,5 @@ cloud:
       path:
         upload: upload
     credentials:
-      access-key: AKIAVNC7ICKTGD3BG6GQ
-      secret-key: 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
+      access-key:
+      secret-key:
