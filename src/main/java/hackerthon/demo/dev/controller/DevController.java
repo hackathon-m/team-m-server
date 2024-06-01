@@ -1,4 +1,4 @@
-package hackerthon.demo.domain.dev.controller;
+package hackerthon.demo.dev.controller;
 
 import hackerthon.demo.common.dto.Response;
 import io.swagger.v3.oas.annotations.Operation;
