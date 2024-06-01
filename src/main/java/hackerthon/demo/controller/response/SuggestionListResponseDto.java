@@ -13,6 +13,7 @@ public class SuggestionListResponseDto {
     private Long suggestionId;
     private Long gifticonId;
     private String gifticonImageUrl;
+    private int price;
     private String brand;
     private String name;
     private Long suggesterId;
@@ -23,6 +24,7 @@ public class SuggestionListResponseDto {
                 .gifticonId(suggestion.getGifticon().getId())
                 .gifticonImageUrl(suggestion.getGifticon().getImageUrl())
                 .brand(suggestion.getGifticon().getBrand())
+                .price(suggestion.getGifticon().getPrice())
                 .name(suggestion.getGifticon().getName())
                 .suggesterId(suggestion.getSuggester().getId())
                 .build();
