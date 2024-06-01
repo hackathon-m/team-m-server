@@ -49,6 +49,7 @@ public class GameRoom extends BaseEntity {
         this.gameType = gameType;
         this.roomStatus = roomStatus;
         this.host = host;
+        this.gifticons = new ArrayList<>();
     }
 
 
