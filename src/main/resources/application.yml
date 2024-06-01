@@ -5,8 +5,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://hackathon-m-rds.ciwy7obdgrgx.ap-northeast-2.rds.amazonaws.com/hackathon_m
-    username: ${{ secret.DATABASE_USERNAME }}
-    password: ${{ secret.DATABASE_PASSWORD }}
+    username: admin
+    password: admin123
 
 #    url: jdbc:mysql://localhost:3306/hackathon_m
 #    username: root
