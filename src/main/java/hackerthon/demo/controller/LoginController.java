@@ -21,7 +21,7 @@ public class LoginController {
 
     @Operation(summary = "회원가입", description = "serialId Authorization 헤더값에 추가, nickname 파라미터 추가")
     @GetMapping("/signup")
-    public ResponseEntity<String> signUp(HttpServletRequest request, @RequestParam("nickname") String nickname) {
+    public ResponseEntity<String> signUp(HttpServletRequest request, @RequestParam("nickname") String nickname) throws Exception {
         String serialId = request.getHeader("Authorization");
         memberService.signUp(serialId, nickname);
         return ResponseEntity.ok("회원가입 success");
