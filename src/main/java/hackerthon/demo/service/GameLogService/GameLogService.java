@@ -7,5 +7,5 @@ import java.util.List;
 public interface GameLogService {
 
     List<GameLogResponse.GameLogResultDTO> findGameLogList(String serialId);
-
+    String updateGameResult(Long winnerId, Long gameRoomId);
 }

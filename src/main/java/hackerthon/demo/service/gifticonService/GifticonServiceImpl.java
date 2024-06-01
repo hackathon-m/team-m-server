@@ -60,4 +60,22 @@ public class GifticonServiceImpl implements GifticonService {
         GifticonResponse.GifticonResultDTO gifticonResultDTO = GifticonConverter.toGifticonResultDTO(gifticon);
         return gifticonResultDTO;
     }
+//
+//    @Transactional
+//    public void changeGifticonOwner(Long roomId, Long newOwnerId) {
+//        GameRoom gameRoom = gameRoomRepository.findById(roomId)
+//                .orElseThrow(() -> new EntityNotFoundException("게임 룸을 찾을 수 없습니다."));
+//
+//        Member newOwner = memberRepository.findById(newOwnerId)
+//                .orElseThrow(() -> new EntityNotFoundException("새 소유자를 찾을 수 없습니다."));
+//
+//        List<Gifticon> gifticons = gameRoom.getGifticons();
+//
+//        for (Gifticon gifticon : gifticons) {
+//            gifticon.setMember(newOwner);
+//            gifticonRepository.save(gifticon);
+//        }
+//    }
+
+
 }
