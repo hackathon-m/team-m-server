@@ -31,24 +31,23 @@ public class GameRoomController {
             responses = @ApiResponse(responseCode = "200", description = "게시글 전체를 반환합니다.")
     )
     @GetMapping
-    public Response<List<GameRoomResponseDto>> getGameRoomsByCategory(@RequestParam(required = false) Category category) {
+    public hackerthon.demo.apiPayload.ApiResponse<List<GameRoomResponseDto>> getGameRoomsByCategory(@RequestParam(required = false) Category category) {
         List<GameRoomResponseDto> gameRooms = gameRoomService.getGameRooms(category)
                 .stream()
                 .map(GameRoomResponseDto::fromEntity)
                 .collect(Collectors.toList());
-        return Response.of(200, "조회 성공", gameRooms);
+        return hackerthon.demo.apiPayload.ApiResponse.onSuccess(gameRooms);
     }
 
     @Operation(
-            summary = "GameRoom 생성",
-            responses = @ApiResponse(responseCode = "200", description = "User가 방장이 되어 GameRoom을 생성합니다.")
+            summary = "GameRoom 생성"
     )
     @PostMapping("/create")
-    public Response<GameRoomResponseDto> createGameRoom(@RequestBody GameRoomCreateRequest request, HttpServletRequest httpServletRequest) {
+    public hackerthon.demo.apiPayload.ApiResponse<GameRoomResponseDto> createGameRoom(@RequestBody GameRoomCreateRequest request, HttpServletRequest httpServletRequest) {
 
         GameRoomResponseDto gameRoomResponseDto = gameRoomService.createGameRoom(request, httpServletRequest);
 
-        return Response.of(201, "생성 성공", gameRoomResponseDto);
+        return hackerthon.demo.apiPayload.ApiResponse.onSuccess(gameRoomResponseDto);
     }
 
 

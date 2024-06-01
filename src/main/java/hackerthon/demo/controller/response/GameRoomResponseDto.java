@@ -19,10 +19,12 @@ public class GameRoomResponseDto {
     private Category category;
     private GameType gameType;
     private String gifticonTitle;
+    private String imageUrl;
 
     public static GameRoomResponseDto fromEntity(GameRoom gameRoom) {
 
         String gifticonTitle = gameRoom.getGifticons().isEmpty() ? null : gameRoom.getGifticons().get(0).getName();
+        String imageUrl = gameRoom.getCategory().getImageUrl();
 
         return GameRoomResponseDto.builder()
                 .id(gameRoom.getId())
@@ -31,6 +33,7 @@ public class GameRoomResponseDto {
                 .category(gameRoom.getCategory())
                 .gameType(gameRoom.getGameType())
                 .gifticonTitle(gifticonTitle)
+                .imageUrl(imageUrl)
                 .build();
     }
 
