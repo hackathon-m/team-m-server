@@ -42,15 +42,24 @@ public class SuggestionService {
     @Transactional
     public AcceptSuggetionResponseDto acceptSuggestion(HttpServletRequest request,  Long suggestionId){
         String serialId = request.getHeader("Authorization");
-        Member member = memberRepository.findBySerialId(serialId).orElseThrow(() -> new EntityNotFoundException("해당 사용자 존재하지 않음"));
+        Member host = memberRepository.findBySerialId(serialId).orElseThrow(() -> new EntityNotFoundException("해당 사용자 존재하지 않음"));
+
+        //member total +1
+        host.setTotal(host.getTotal()+1);
+        memberRepository.save(host);
 
         Suggestion suggestion = suggestionRepository.findById(suggestionId).orElseThrow(() -> new EntityNotFoundException("해당 제안 존재하지 않음"));
+        Member suggester = memberRepository.findById(suggestion.getId()).orElseThrow(() -> new EntityNotFoundException("해당 사용자 존재하지 않음"));
+
+        suggester.setTotal(host.getTotal() + 1);
+        memberRepository.save(suggester);
+
         GameRoom gameRoom = gameRoomRepository.findById(suggestion.getGameRoom().getId()).orElseThrow(() -> new EntityNotFoundException("해당 게임방 존재하지 않음"));
 
         gameRoom.getGifticons().add(suggestion.getGifticon());
         gameRoomRepository.save(gameRoom);
 
-        AcceptSuggetionResponseDto acceptSuggetionResponseDto = AcceptSuggetionResponseDto.resultDto(member.getId(), suggestion.getSuggester().getId(), gameRoom.getId());
+        AcceptSuggetionResponseDto acceptSuggetionResponseDto = AcceptSuggetionResponseDto.resultDto(host.getId(), suggestion.getSuggester().getId(), gameRoom.getId());
         return acceptSuggetionResponseDto;
     }
 
