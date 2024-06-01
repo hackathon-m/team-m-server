@@ -58,17 +58,17 @@ public class SwaggerConfiguration {
 
     @Bean
     public OpenAPI openApi() {
-        String description = "GDSC Soongsil 스프링부트 스터디를 위한 Swagger 문서입니다.";
+        String description = "너디너리 해커톤 Swagger 문서입니다.";
         String securityRequirementName = "bearerAuth";
         return new OpenAPI()
             .servers(Collections.singletonList(new Server().url("/")))
             .security(Collections.singletonList(new SecurityRequirement().addList(securityRequirementName)))
             .components(new Components().addSecuritySchemes(securityRequirementName, securityScheme))
             .info(new Info()
-                .title("GDSC Forum API")
+                .title("해커톤 API")
                 .description(description)
                 .version("0.0.1")
             )
-            .externalDocs(new ExternalDocumentation().description("GDSC Forum API"));
+            .externalDocs(new ExternalDocumentation().description("team-m API"));
     }
 }
