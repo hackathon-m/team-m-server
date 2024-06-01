@@ -18,8 +18,6 @@ public class GameRoom extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long hostId;
-
     private String title;
 
     @Enumerated(EnumType.STRING)
@@ -38,8 +36,7 @@ public class GameRoom extends BaseEntity {
     private Member host;
 
     @Builder
-    public GameRoom( Long hostId, String title, Category category, int field, GameType gameType, RoomStatus roomStatus, Member host) {
-        this.hostId = hostId;
+    public GameRoom( String title, Category category, int field, GameType gameType, RoomStatus roomStatus, Member host) {
         this.title = title;
         this.category = category;
         this.field = field;

@@ -9,6 +9,7 @@ import hackerthon.demo.service.GameRoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class GameRoomController {
             summary = "전체 GameRoom 조회",
             responses = @ApiResponse(responseCode = "200", description = "게시글 전체를 반환합니다.")
     )
-    @GetMapping("")
+    @GetMapping
     public Response<List<GameRoomResponseDto>> getGameRoomsByCategory(@RequestParam(required = false) Category category) {
         List<GameRoomResponseDto> gameRooms = gameRoomService.getGameRooms(category)
                 .stream()
@@ -43,8 +44,9 @@ public class GameRoomController {
             responses = @ApiResponse(responseCode = "200", description = "User가 방장이 되어 GameRoom을 생성합니다.")
     )
     @PostMapping("/create")
-    public Response<GameRoomResponseDto> createGameRoom(@RequestBody GameRoomCreateRequest request) {
-        GameRoomResponseDto gameRoomResponseDto = gameRoomService.createGameRoom(request);
+    public Response<GameRoomResponseDto> createGameRoom(@RequestBody GameRoomCreateRequest request, HttpServletRequest httpServletRequest) {
+
+        GameRoomResponseDto gameRoomResponseDto = gameRoomService.createGameRoom(request, httpServletRequest);
 
         return Response.of(201, "생성 성공", gameRoomResponseDto);
     }
