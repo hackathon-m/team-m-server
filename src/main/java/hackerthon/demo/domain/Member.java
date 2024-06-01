@@ -10,6 +10,7 @@ import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class Member extends BaseEntity {
 
     private String serialId;
     private String nickName;
-    private Double winRate;
+    private Double win;
+    private Double total;
 
 }

@@ -53,6 +53,7 @@ public class GameLogServiceImpl implements GameLogService {
     @Transactional
     public String updateGameResult(Long winnerId, Long gameRoomId){
         Member member = memberRepository.findById(winnerId).orElseThrow(()-> new IllegalArgumentException("해당 시리얼ID를 가진 멤버가 존재하지 않습니다."));
+        member.setWin(member.getWin() + 1);
 
         GameRoom gameRoom = gameRoomRepository.findById(gameRoomId).orElseThrow(()-> new IllegalArgumentException("해당 시리얼ID를 가진 멤버가 존재하지 않습니다."));
 

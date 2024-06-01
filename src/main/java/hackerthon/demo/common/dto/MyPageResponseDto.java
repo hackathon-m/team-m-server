@@ -12,9 +12,13 @@ public class MyPageResponseDto {
     private Double winRate;
 
     public static MyPageResponseDto convertor(Member member) {
+        double winRate = 0;
+        if (member.getTotal() != 0) {
+            winRate = (double) member.getWin() / member.getTotal();
+        }
         MyPageResponseDto myPageResponseDto = MyPageResponseDto.builder()
                 .nickname(member.getNickName())
-                .winRate(member.getWinRate())
+                .winRate(winRate)
                 .build();
 
         return myPageResponseDto;
